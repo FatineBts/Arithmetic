@@ -1,0 +1,36 @@
+LIP6 Laboratory
+PEQUAN Team
+
+Configuration script supports only g++ and icc.
+
+To install the CADNA library, follow the instructions in the INSTALL file.
+Some examples:
+./configure CXX=YourC++Compiler 
+./configure --prefix=TheInstallationDirectory
+./configure --enable-64bit
+./configure CXX=YourC++Compiler  --prefix=TheInstallationDirectory --enable-64bit
+
+The version of CADNA for OpenMP codes differs from the one for sequential codes.
+To generate a version of CADNA for OpenMP codes, use "enable-omp".
+Example:
+./configure CXX=YourC++Compiler  --prefix=TheInstallationDirectory --enable-64bit --enable-omp
+
+Then 
+make install
+
+Then, to compile and execute some test examples, just do:
+cd examples
+make clean 
+make
+
+Example: compilation of a code named ex.cc with CADNA version X.X.X
+If ex.cc is a sequential code:
+g++ ex.cc -I/home/.../cadna_c-X.X.X/include -L/home/.../cadna_c-X.X.X/lib -lcadnaC -m64 -frounding-math
+If ex.cc is an OpenMP code:
+g++ ex.cc -I/home/.../cadna_c-X.X.X/include -L/home/.../cadna_c-X.X.X/lib -lcadnaC -m64 -fopenmp -frounding-math
+
+CADNA has been successfully tested with:
+- g++ version 5.3.0 for sequential and OpenMP codes
+- icc version 15.0.2 for sequential codes.
+  Compiling CADNA for OpenMP codes with icc version 15.0.2 generates an error 
+  because OpenMP reductions are not supported by icc version 15.0.2.
